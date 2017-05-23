@@ -2,7 +2,7 @@ import praw
 import threading
 from ttll import t_to_l
 
-secret = False
+secret = True
 
 
 def title_monitor(name, words_to_search, subreddits):
@@ -13,7 +13,7 @@ def title_monitor(name, words_to_search, subreddits):
             if word in post.title.lower():
                 try:
                     if secret:
-                       print(t_to_l(post.title) + '\n') 
+                       print(name +'- Post :' + t_to_l(post.title) + '\n') 
                     if not secret:
                        print(name +'- Post :' + post.title + '\n')
                 except:
@@ -29,7 +29,7 @@ def comment_monitor(name, words_to_search, subreddits):
             if word in comment.body.lower():
                 try:
                     if secret:
-                        print(t_to_l(comment.body) + '\n')
+                        print(name + '- Comment :' +t_to_l(comment.body) + '\n')
                     if not secret:
                         print(name + '- Comment :' +comment.body + '\n')
                 except:
@@ -44,13 +44,16 @@ def main(name, words_to_search, subreddits, which = 'pc' ):
     if 'c' in which:
         comment = threading.Thread(target = comment_monitor,args = [name, words_to_search, subreddits]).start()
     return
+
+
+
 amd_wrds = ['amd', 'lisa su', 'advanced micro devices', ]
 g_sts = ['wallstreetbets','investing','robinhood','gaming','stocks']
 
 
 
-#main('AMD', amd_wrds, g_sts, 'pc')
-#main('ETHER', ['eth'], ['ethtrader', 'ethinsider', 'etherium', 'cryptomarkets', 'cryptocurrency', 'golemproject'], 'p')
+main('AMD', amd_wrds, g_sts, 'pc')
+main('ETHER', ['eth'], ['ethtrader', 'ethinsider', 'ethereum', 'cryptomarkets', 'cryptocurrency', 'golemproject'], 'p')
 
 def devon():
     
@@ -65,4 +68,4 @@ def devon():
         secret = True
     main(name,words,subreddits, which)
 
-devon()
+
