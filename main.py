@@ -37,18 +37,20 @@ def comment_monitor(name, words_to_search, subreddits):
                 
                 break
 
-def main(name, words_to_search, subreddits):
+def main(name, words_to_search, subreddits, which = 'pc' ):
     subreddits = '+'.join(subreddits)
-    title = threading.Thread(target = title_monitor, args =[name, words_to_search, subreddits]).start()
-    comment = threading.Thread(target = comment_monitor,args = [name, words_to_search, subreddits]).start()
+    if 'p' in which:
+        title = threading.Thread(target = title_monitor, args =[name, words_to_search, subreddits]).start()
+    if 'c' in which:
+        comment = threading.Thread(target = comment_monitor,args = [name, words_to_search, subreddits]).start()
     return
 amd_wrds = ['amd', 'lisa su', 'advanced micro devices', ]
 g_sts = ['wallstreetbets','investing','robinhood','gaming','stocks']
 
 
 
-#main('AMD', amd_wrds, g_sts)
-#main('ETHER', ['eth'], ['ethtrader', 'ethinsider', 'etherium', 'cryptomarkets', 'cryptocurrency', 'golemproject'])
+#main('AMD', amd_wrds, g_sts, 'pc')
+#main('ETHER', ['eth'], ['ethtrader', 'ethinsider', 'etherium', 'cryptomarkets', 'cryptocurrency', 'golemproject'], 'p')
 
 def devon():
     
@@ -56,9 +58,11 @@ def devon():
     subreddits = input('\nWhat sub? \n again, Seperate by a comma and don\'t add spaces between subs and commas\n').lower().split(',')
     name = input('What do you want to call this search?')
     secret_us = input('Scrabled eggs? y/n')
+    which = input('Type \'p\' for posts and \'c\' for comments, type \'pc\' for both').lower()
+    
     if 'y' in secret_us.lower():
         global secret
         secret = True
-    main(name,words,subreddits)
+    main(name,words,subreddits, which)
 
 devon()
