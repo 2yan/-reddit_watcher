@@ -1,6 +1,8 @@
 import praw
 import threading
+from ttll import t_to_l
 
+secret = False
 
 def title_monitor(name, words_to_search, subreddits):
     reddit = praw.Reddit('bot1')
@@ -11,7 +13,10 @@ def title_monitor(name, words_to_search, subreddits):
                 
                 print(name +' - POST ' + str(post))
                 try:
-                    print(post.title + '\n')
+                    if secret:
+                       print(t_to_l(post.title) + '\n') 
+                    if not secret:
+                       print(post.title + '\n')
                 except:
                     pass
                 
@@ -25,7 +30,10 @@ def comment_monitor(name, words_to_search, subreddits):
             if word in comment.body.lower():
                 print(name + ' - COMMENT ' + str(comment))
                 try:
-                    print(comment.body + '\n')
+                    if secret:
+                        print(t_to_l(comment.body) + '\n')
+                    if not secret:
+                        print(comment.body + '\n')
                 except:
                     pass
                 
@@ -41,6 +49,19 @@ g_sts = ['wallstreetbets','investing','robinhood','gaming','stocks']
 
 
 
-main('AMD', amd_wrds, g_sts)
-main('ETHER', ['eth'], ['ethtrader', 'ethinsider', 'etherium', 'cryptomarkets', 'cryptocurrency'])
+#main('AMD', amd_wrds, g_sts)
+#main('ETHER', ['eth'], ['ethtrader', 'ethinsider', 'etherium', 'cryptomarkets', 'cryptocurrency'])
+
+def devon():
     
+    words = input('What words should I search for?\n Seperate by a comma and don\'t add spaces between words and commas \n ENTER WORDS HERE ->').lower().split(',')
+    subreddits = input('\nWhat sub? \n again, Seperate by a comma and don\'t add spaces between subs and commas\n').lower().split(',')
+    name = input('What do you want to call this search?')
+    secret_us = input('Scrabled eggs? y/n')
+    if 'y' in secret_us.lower():
+        global secret
+        secret = True
+    main(name, words, subreddits)
+
+
+devon()
