@@ -12,5 +12,18 @@ To use: make sure you have:
 ## renamed praw_sample.ini to praw.ini
 
 ## added your client_id and client_secret (Without quotes, just the values) to praw.ini
+ 
+ The client_id and client_secret are obtained from reddit:
+ 
+https://www.reddit.com/prefs/apps
+
+click on 'create another app'
+
+name it whatever you want
+
+redirect uri =http://127.0.0.1
+
+give it a good description
+
 
 Then just run main.py and follow the prompts
