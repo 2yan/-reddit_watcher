@@ -4,19 +4,18 @@ from ttll import t_to_l
 
 secret = False
 
+
 def title_monitor(name, words_to_search, subreddits):
     reddit = praw.Reddit('bot1')
     subreddit = reddit.subreddit(subreddits)
     for post in subreddit.stream.submissions():
         for word in words_to_search:
             if word in post.title.lower():
-                
-                print(name +' - POST ' + str(post))
                 try:
                     if secret:
                        print(t_to_l(post.title) + '\n') 
                     if not secret:
-                       print(post.title + '\n')
+                       print(name + ':' + post.title + '\n')
                 except:
                     pass
                 
@@ -28,12 +27,11 @@ def comment_monitor(name, words_to_search, subreddits):
     for comment in subreddit.stream.comments():
         for word in words_to_search:
             if word in comment.body.lower():
-                print(name + ' - COMMENT ' + str(comment))
                 try:
                     if secret:
                         print(t_to_l(comment.body) + '\n')
                     if not secret:
-                        print(comment.body + '\n')
+                        print(name + ':' +comment.body + '\n')
                 except:
                     pass
                 
@@ -49,8 +47,8 @@ g_sts = ['wallstreetbets','investing','robinhood','gaming','stocks']
 
 
 
-#main('AMD', amd_wrds, g_sts)
-#main('ETHER', ['eth'], ['ethtrader', 'ethinsider', 'etherium', 'cryptomarkets', 'cryptocurrency'])
+main('AMD', amd_wrds, g_sts)
+main('ETHER', ['eth'], ['ethtrader', 'ethinsider', 'etherium', 'cryptomarkets', 'cryptocurrency', 'golemproject'])
 
 def devon():
     
@@ -61,7 +59,5 @@ def devon():
     if 'y' in secret_us.lower():
         global secret
         secret = True
-    main(name, words, subreddits)
+    main(name,words,subreddits)
 
-
-devon()
