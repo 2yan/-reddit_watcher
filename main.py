@@ -15,7 +15,7 @@ def title_monitor(name, words_to_search, subreddits):
                     if secret:
                        print(t_to_l(post.title) + '\n') 
                     if not secret:
-                       print(name + ':' + post.title + '\n')
+                       print(name +'- Post :' + post.title + '\n')
                 except:
                     pass
                 
@@ -31,7 +31,7 @@ def comment_monitor(name, words_to_search, subreddits):
                     if secret:
                         print(t_to_l(comment.body) + '\n')
                     if not secret:
-                        print(name + ':' +comment.body + '\n')
+                        print(name + '- Comment :' +comment.body + '\n')
                 except:
                     pass
                 
@@ -41,14 +41,14 @@ def main(name, words_to_search, subreddits):
     subreddits = '+'.join(subreddits)
     title = threading.Thread(target = title_monitor, args =[name, words_to_search, subreddits]).start()
     comment = threading.Thread(target = comment_monitor,args = [name, words_to_search, subreddits]).start()
-
+    return
 amd_wrds = ['amd', 'lisa su', 'advanced micro devices', ]
 g_sts = ['wallstreetbets','investing','robinhood','gaming','stocks']
 
 
 
-main('AMD', amd_wrds, g_sts)
-main('ETHER', ['eth'], ['ethtrader', 'ethinsider', 'etherium', 'cryptomarkets', 'cryptocurrency', 'golemproject'])
+#main('AMD', amd_wrds, g_sts)
+#main('ETHER', ['eth'], ['ethtrader', 'ethinsider', 'etherium', 'cryptomarkets', 'cryptocurrency', 'golemproject'])
 
 def devon():
     
@@ -61,3 +61,4 @@ def devon():
         secret = True
     main(name,words,subreddits)
 
+devon()
