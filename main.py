@@ -2,7 +2,7 @@ import praw
 import threading
 from ttll import t_to_l
 
-secret = True
+secret = False
 
 
 def title_monitor(name, words_to_search, subreddits):
@@ -53,7 +53,7 @@ g_sts = ['wallstreetbets','investing','robinhood','gaming','stocks']
 
 
 main('AMD', amd_wrds, g_sts, 'pc')
-main('ETHER', ['eth'], ['ethtrader', 'ethinsider', 'ethereum', 'cryptomarkets', 'cryptocurrency', 'golemproject'], 'p')
+main('ETHER', ['eth'], ['ethtrader', 'ethinsider', 'ethereum', 'cryptomarkets', 'cryptocurrency', 'golemproject'], 'pc')
 
 def devon():
     
